@@ -6,7 +6,6 @@ Required Packages
 
 install.packages(c("tidyverse", "mlr3verse", "ranger", "mlr3viz"))
 data(german_credit)  # Ensure the dataset is available
-library(mlr3verse)
 
 ## Load German Credit task
 task <- tsk("german_credit")
@@ -29,15 +28,10 @@ resampling <- rsmp('bootstrap', repeats = 100L)
 design <- benchmark_grid(task = task, learners = learners, resampling = resampling)
 bmr <- benchmark(design)
 
-### 4. Evaluate Performance
+### 4. Evaluate Performance and plot
 
 ## Aggregate results with Accuracy and Balanced Accuracy
 results <- bmr$aggregate(msrs(c("classif.acc", "classif.bacc")))
-print(results)
-5. Visualization
-r
-Copy
-library(mlr3viz)
 
 ## Plot Accuracy
 autoplot(bmr, measure = msr("classif.acc")) + 
@@ -47,5 +41,5 @@ autoplot(bmr, measure = msr("classif.acc")) +
 autoplot(bmr, measure = msr("classif.bacc")) + 
   ggtitle("Classifier Balanced Accuracy Comparison")
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details. 
